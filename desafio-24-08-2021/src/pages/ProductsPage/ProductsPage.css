@@ -1,0 +1,24 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #FFFFFF;
+    
+}
+
+.products-list{
+   
+    padding: 0;
+    margin: 1rem 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 1rem;
+    
+}
+
+
+@media (max-width: 768px){
+    .products-list{
+        grid-template-columns: repeat(1,1fr);
+    }
+}
