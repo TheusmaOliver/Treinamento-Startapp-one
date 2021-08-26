@@ -1,13 +1,20 @@
 import React from 'react'
 import { store } from '../../data/products'
 import { Container } from '@material-ui/core'
+import { Add } from '@material-ui/icons'
 import ProductsCard from '../../components/ProductsCard/ProductsCard'
 import './ProductsPage.css'
+import { useHistory } from 'react-router-dom'
 export default function ProductsPage() {
+    const router = useHistory()
     return (
-        <div>
+        <div className="products">
             <Container>
-                <h1>{store.title}</h1>
+                <div className="products-title">
+                    <h1>{store.title}</h1>
+                    <Add id="add" onClick={() => router.push('/register')}/>
+                </div>
+                
 
                 <hr />
 

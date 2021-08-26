@@ -1,10 +1,9 @@
 import React from 'react'
-import ProductsPage from './pages/ProductsPage/ProductsPage'
-
+import Routes from './Routes'
 export default function App() {
     return (
         <div>
-            <ProductsPage/>
+            <Routes/>
         </div>
     )
 }
