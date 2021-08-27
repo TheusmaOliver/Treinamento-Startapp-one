@@ -1,9 +1,18 @@
 import React from 'react'
 import { DeleteOutline, Edit } from '@material-ui/icons'
 import './ProductCard.css'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 export default function ProductCard(props) {
+    const router = useHistory();
+
+    const deleteProduct = (id) => {
+        let products = JSON.parse(localStorage.getItem('products')) || [];
+        products = products.filter(product => product.id !== id);
+      
+        localStorage.setItem('products',JSON.stringify(products))
+        router.push('/')
+      }
     return (
         <div className="product-card">
             <img src={props.imgUrl} alt={props.title} />
@@ -15,10 +24,9 @@ export default function ProductCard(props) {
             </div>
 
             <div className="product-card-actions">
-               <Link to={`/register/${props.id}`}>
-                <Edit id='edit'/>
-               </Link> 
-                <DeleteOutline id='delete'/>
+                <Edit id='edit' onClick={() => router.push(`/edit/${props.id}`)}/>
+               
+                <DeleteOutline id='delete' onClick={() => deleteProduct(props.id)}/>
             </div>
         </div>
     )

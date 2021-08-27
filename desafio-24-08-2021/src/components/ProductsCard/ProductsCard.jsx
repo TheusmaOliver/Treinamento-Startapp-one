@@ -18,7 +18,7 @@ export default function ProductsCard(props ) {
                 <span className="products-info-price">R$ {props.price}</span>
             </div>
             <div className="products-item-image">
-                <img src={props.imgUrl} alt={props.title} />
+                <img src={`${props.imgUrl}`} alt={props.title} />
             </div>
         </li>
     )
