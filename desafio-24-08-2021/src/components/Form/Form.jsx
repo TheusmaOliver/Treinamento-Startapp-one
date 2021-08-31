@@ -14,18 +14,16 @@ const initialValue={
 
 export default function Form({id}) {
     const router = useHistory()
-    const products = JSON.parse(localStorage.getItem('products')) || [];
+    let products = JSON.parse(localStorage.getItem('products')) || [];
     const [values,setValues] = useState(initialValue);
+    
+    let selectedProduct = products.find(
+        (product) => parseInt(product.id) === parseInt(id)
+    );
 
-    const loadProducts = () =>{
-        const selectedProduct = products.find(
-            (product) => parseInt(product.id) === parseInt(id)
-        );
-        setValues(selectedProduct);
-    }
     useEffect(()=>{
         if(id){
-            loadProducts();
+            setValues(selectedProduct);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[id])
@@ -41,10 +39,20 @@ export default function Form({id}) {
 
     function onSubmit(ev){
         ev.preventDefault()
-        products.push({
-            id:randomId(),
-            ...values,
-        })
+
+        
+        if(id){
+            selectedProduct.title = values.title
+            selectedProduct.description = values.description
+            selectedProduct.price = values.price
+            selectedProduct.imgUrl = values.imgUrl
+            selectedProduct.category = values.category
+        }else{
+            products.push({
+                id:randomId(),
+                ...values,
+            })
+        }
         localStorage.setItem('products',JSON.stringify(products))
         router.push('/')
     }
@@ -52,7 +60,7 @@ export default function Form({id}) {
     return (
         <Container>
             {id
-                ? <h1>Editar {values.title}</h1>
+                ? <h1>Editar {selectedProduct.title}</h1>
                 : <h1>Cadastrar Produto</h1>
             }
             <hr/>
